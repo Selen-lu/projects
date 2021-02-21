@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">	
+	
+
+
+
+<mapper namespace="com.project.nolate.mapper.MarkBoardMapper">
+		
+		<!-- 모든 게시글 가져오는 맵핑 
+		검색 기능 없을때는 -> resultType="MarkBoard"
+		daoImpl에서 넘어온 markParams가 hashMap이므로 결과타입도 변경
+		LIMIT -> 검색된 데이터에서 특정행 번호부터 지정한 개수만큼 행을 읽어옴(서비스 참고)
+		
+		- 페이징 처리만 할때 뷰단에서 안뜬이유 -> resultType으로 지정하고 markBoard로 적어서....
+		- 검색기능 처리시 resultMap -> resultType으로 변경 후 markBoardMap을 markBoard로 변경
+		- where절 사용시1 -> ${}사용 안함, 파라미터 이름만 사용
+		- where절 사용시2 ->문자열 사용시 쌍 따옴표나 홑따옴표 사용 
+		
+		- select * 안쓰는 이유(no만 오는 이유..나머지는 안옴..) : 별칭을 써야 markList에 돌려줄때 가능함..
+		- name으로 왔으면 name으로 검색해야되는데 
+		- 별칭이 없으면 sql문컬럼은 MARK_NAME로 검색해야되므로 
+		- 이름이 서로 달라서 인식을 못함
+		- 검색 구현 시 select절에 as 생략하면 찾지 못함.....반드시 넣어야함
+		-->
+		<select id="markList" resultType="MarkBoard" parameterType ="hashmap" >
+				SELECT 
+					no,
+					MARK_NAME AS name,
+					MARK_latitude AS latitude,
+					MARK_longitude AS longitude,
+					MARK_latticeX AS latticeX,
+					MARK_latticeY AS latticeY,
+					MARK_NICKNAME AS nickname 
+				FROM Mark 
+				<where>
+					<include refid="search"/>	
+				</where>
+				ORDER BY no DESC 
+				LIMIT #{startRow},#{num}
+		</select>
+		
+	
+		
+<!-- 		<sql id="a">
+			SELECT no, MARK_NAME as name,MARK_NICKNAME as nickname FROM Mark
+		</sql> -->
+		<!-- 전체 게시글 수 카운트 맵핑 
+			쿼리 결과가 정수 라서 resultType =int형으로 지정,
+			resultType =int 생략하면 예외 발생하니 주의-->
+		<select id="getMarkBoardCount" resultType="int" parameterType="hashmap" >
+				SELECT 
+					COUNT(no)
+				FROM Mark 
+				<!-- <where>
+			<include refid="search"/>	
+				</where>
+				ORDER BY no ASC  -->
+
+		</select>
+		
+		<!-- 반복 코드 줄여주는 sql구절  -->
+		<sql id="search">
+			<if test="type == 'name'.toString()">
+					AND MARK_NAME LIKE CONCAT('%',#{keyword},'%')
+			</if>
+			<if test="type=='nickname'.toString()">
+					AND MARK_NICKNAME LIKE CONCAT('%',#{keyword},'%')
+			</if>			
+		</sql>
+		
+		
+		<!-- 	!! DB에 저장하는 맵핑 
+			SqlSessionTemplate의 insert 반환타입은 int,
+			 ResultType 생략가능..
+			 시퀀스 처리된 값을 읽을 때는 useGeneratedKeys 사용 후
+			 자동생성 된 키값 설정할 자바모델 을 keyProperty로 설정
+			 -> 보드 객체의 no 프로티에 값을 설정함 -->
+		<insert id="insertMark" parameterType="MarkBoard" useGeneratedKeys="true" keyProperty="no">
+			INSERT INTO Mark(MARK_NAME,MARK_latitude,MARK_longitude,MARK_latticeX,MARK_latticeY,MARK_NICKNAME)
+			VALUES(#{name},#{latitude},#{longitude},#{latticeX},#{latticeY},#{nickname})
+
+		</insert>
+		
+		
+		<!-- 	!! 수정 하는 맵핑
+			SqlSessionTemplate의 update 반환타입은 int, 
+			ResultType 생략 가능..-->
+		<!-- <update id="updateMark" parameterType ="MarkBoard"> -->
+		<update id="updateMark" parameterType ="hashMap">
+			UPDATE Mark
+			SET MARK_NICKNAME = #{nickname}
+			WHERE no = #{no}
+		</update>
+		
+		<!-- 삭제 하는 맵핑
+		dao클래스의 deleteMarkBoard(int no) 메서드에서 사용하는 맵핑 구문
+		반환값 int이므로 ResultType 생략가능 -->
+		<delete id="deleteMark">
+			DELETE FROM Mark
+			WHERE no = #{no}
+		</delete>
+
+
+	<!-- MarkBoard 클래스의 프로퍼티와 테이블의 컬럼 맵핑하는 ResultMap 
+		: 언더스코어,컬럼 별칭 미리 맵핑, 맨 아래에 지정해야함 -->
+		<!-- 이유는 모르겠는데, MARK_NO int auto_increment PRIMARY KEY로 지정하면
+			id property에서 인식을 못함...-->
+	<resultMap id="markBoardResultMap" type="MarkBoard" >
+		<id property="no" column="no"/>
+		<result property="name" column="MARK_NAME"/>
+		<result property="latitude" column="MARK_latitude"/>
+		<result property="longitude" column="MARK_longitude"/>
+		<result property="latticeX" column="MARK_latticeX"/>
+		<result property="latticeY" column="MARK_latticeY"/>
+		<result property="nickname" column="MARK_NICKNAME"/>
+	</resultMap>
+
+
+</mapper>	
+
+
+
