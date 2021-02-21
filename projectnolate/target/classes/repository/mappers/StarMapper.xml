@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.nolate.mapper.StarMapper" >
+	
+	<select id="starLists" resultType="Star" resultMap="starResultMap">
+		SELECT * FROM star_table
+	</select>
+	
+	
+	<select id="getstar" resultType="Star" resultMap="starResultMap">
+		SELECT * FROM star_table WHERE title =#{title}
+	</select>
+	
+	 <update id="updatestar" parameterType="Star">
+		UPDATE star_table  SET content=#{content},item=#{item} WHERE title=#{title}
+	</update>
+
+	<resultMap type="Star" id="starResultMap">
+		<id property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="item" column="item" />	
+	</resultMap>
+	
+
+</mapper>	
+
+
+

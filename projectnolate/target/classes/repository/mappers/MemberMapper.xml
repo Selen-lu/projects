@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<!-- <mapper namespace="com.springstudy.bbs.mapper.BoardMapper" > -->
+<mapper namespace="com.project.nolate.mapper.MemberMapper">
+	<select id="getMember" resultMap="memberResultMap" >
+		SELECT *
+		FROM member JOIN member_auth using(id)
+		WHERE id = #{id}
+	</select>
+	
+	<select id="getId" resultType="String">
+		SELECT id
+		FROM member
+		WHERE email = #{email}
+	</select>
+	
+	<select id="getOverlapId" resultType="String">
+		SELECT id
+		FROM member
+		WHERE id = #{id}
+	</select>
+	
+	<select id="getPass" parameterType="hashMap" resultType="String">
+		SELECT pass
+		FROM member
+		WHERE id = #{id} AND email = #{email}
+	</select>
+	
+	<insert id="insertMember" parameterType="Member">
+		INSERT INTO member(id, pass, email, birthday, homeaddress, companyaddress)
+		VALUES(#{id}, #{pass}, #{email}, #{birthday}, #{homeAddress}, #{companyAddress})
+	</insert>
+	
+	<insert id="insertAuth" parameterType="MemberAuth">
+		INSERT INTO member_auth(id, auth)
+		VALUES(#{id}, #{auth})
+	</insert>
+	
+	<update id="updateMember" parameterType="Member">
+		UPDATE member
+		SET pass = #{pass}, email = #{email}, birthday = #{birthday}, home_Address = #{homeAddress}, company_Address = #{companyAddress}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="updatePass" parameterType="hashMap">
+		UPDATE member
+		SET pass = #{pass}
+		WHERE id = #{id}
+	</update>
+	
+	<select id="confirmPass" parameterType="String" resultType="String">
+		SELECT pass
+		FROM member
+		WHERE id = #{id}
+	</select>
+	
+	
+	
+	<delete id="deleteMember">
+		DELETE FROM member
+		WHERE id = #{id}
+	</delete>
+	
+	<resultMap id="memberResultMap" type="Member">
+		<result property="id" column="id" />
+		<result property="pass" column="pass" />
+		<result property="email" column="email" />
+		<result property="birthday" column="birthday" />
+		<result property="home_Address" column="homeaddress" />
+		<result property="company_Address" column="companyaddress" />
+		<collection property="authList" resultMap="authResultMap"></collection>
+	</resultMap>
+	
+	<resultMap id="authResultMap" type="MemberAuth">
+		<result property="id" column="id"/>
+		<result property="auth" column="auth" />
+	</resultMap>
+	
+	
+</mapper>

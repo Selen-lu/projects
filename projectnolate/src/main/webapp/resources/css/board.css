@@ -1,0 +1,175 @@
+@CHARSET "UTF-8";
+/*  게시판 전체 적용 */
+table {
+	margin: 50px auto;
+	padding: 0 0;	
+	border-collapse: collapse;
+	line-height: 160%;
+	font-size: 0.75em;
+	/* border: 1px dotted #787878; */
+}
+tr, td { padding: 0 0; }
+.readTable { width: 760px; }
+.listTable { width: 760px; }
+.contentTable { width: 760px; }
+.boardTitle{
+	height: 60px;
+	line-height: 60px;	
+	text-align: center;
+	/* border-bottom: 1px dotted #787878; */
+}
+
+/*  게시 글 리스트 */
+.listWrite { 
+	text-align: right; 
+	padding-right: 15px;	
+	border-bottom: 1px dotted #787878; 
+}
+.listThNo { 
+	width: 60px; 
+	height: 30px;	
+	border: 1px solid #787878; 
+	background: #EAEAEA; 
+}
+.listThTitle { 
+	width: 255px;	  
+	border: 1px solid #787878;  
+	background: #EAEAEA; 
+}
+.listThWriter { 
+	width: 255px;	  
+	border: 1px solid #787878; 
+	background: #EAEAEA; 
+}
+.listThRegDate { 
+	width: 130px;
+	border: 1px solid #787878;  
+	background: #EAEAEA; 
+}
+.listThReadCount {
+	width: 60px;	
+	border: 1px solid #787878;
+	background: #EAEAEA;
+}
+.listTdSpan { 
+	height: 30px; 
+	text-align: center; 
+	font-size: 12px; 
+}
+.listTdNo { 
+	height: 30px;
+}
+.listTdTitle {	
+	padding-left: 10px;	  
+	border: 1px solid #AAAAAA; 
+}
+.listTdNo, .listTdWriter, .listTdRegDate, .listTdReadCount {
+	text-align: center;		  
+	border: 1px solid #AAAAAA; 
+}
+table .listTr:hover {
+	
+}
+#searchForm {
+	text-align: center;
+}
+.listPage { 
+	height: 30px;
+	text-align: center;	 
+}
+
+/* 게시 글 상세보기 */
+.contentTh, .contentTd, .contentTdSpan {
+	border: 1px solid #787878;
+}
+.contentTh { 
+	width: 120px;
+	height: 30px;	
+	text-align: center;
+	background-color: #EAEAEA;	
+}
+.contentTd {
+	width: 250px;
+	padding-left: 10px;
+}
+.contentTdSpan {
+	width: 640px;
+	padding-left: 10px;
+}
+.readContent {	
+	/* height: 300px; */
+	padding: 20px;
+	border: 1px solid #787878;
+	vertical-align: top;
+	/* overflow: scroll; */
+	
+	/* 셀 내용을 자동 줄 바꿈 하기 */
+	word-break: break-all;
+}
+.tdSpan {
+	height: 40px;
+	line-height: 40px;
+	text-align: center; 
+}
+
+/* 게시 글 상세 댓글 부분 */
+
+.mapModify {
+	float: right;
+	width: 70px;
+	height: 30px;
+	line-height: 30px;
+	padding-right: 10px;
+	text-align: right;	
+	margin-top: 10px;
+}
+.mapContent {
+	float: left;
+	width: 190px;
+	clear: both;
+	line-height: 20px;	
+	padding: 5px 10px 5px 10px;	
+	/* border: 1px solid purple; */
+	/* line-height: 30px; */
+}
+#mapForm {
+	width: 300px;
+	margin: 0 auto;
+	display: none;
+}
+#mapWriteTable {
+	width: 100%;
+	height: 26px;
+	line-height: 26px;
+	border: 0px;
+	margin: 5px 0 5px 0;
+	font-size: 12px;
+}
+
+#mapContent {	
+	width: 100%;	
+	padding: 0px;
+	word-break: break-all;
+}
+
+/* 내가만든 */
+.listSaveMap_bt {
+	
+	height: 30px;
+	border: 1px solid #787878;  
+	
+}
+.listSaveMap {
+	
+	height: 30px;
+	width:310px;
+	border: 1px solid #787878;  
+	
+}
+.mapTr {
+	width:300px;	
+}
+span {
+	/* font:12px 'Malgun Gothic' bold ; */
+	font: 12px/100% Malgun Gothic, Helvetica, sans-serif,bold;
+}

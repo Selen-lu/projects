@@ -1,0 +1,19 @@
+@charset "UTF-8";
+ .joinBody{
+	padding-top: 40px;
+	padding-bottom: 40px;
+	background-color: #eee;
+} 
+
+ .join_form{
+  	max-width: 330px;
+ 	 padding: 15px;
+  	margin: 0 auto;
+} 
+
+label{
+	margin: 0px 0px 8px;
+}
+
+
+

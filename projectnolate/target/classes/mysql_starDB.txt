@@ -1,0 +1,40 @@
+use spring;
+
+DROP TABLE IF EXISTS star_table;
+CREATE TABLE star_table(
+  title VARCHAR(50) PRIMARY KEY,
+  content VARCHAR(2000) NOT NULL,
+  item VARCHAR(50) NOT NULL)
+  ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+  
+INSERT INTO star_table(title,content,item) VALUES('[물병자리 1.20 ~ 2.18]',2,3);
+INSERT INTO star_table(title,content,item) VALUES('[물고기자리 2.19 ~ 3.20]',2,3);
+INSERT INTO star_table(title,content,item) VALUES('[양자리 3.21 ~ 4.19]',2,3);
+INSERT INTO star_table(title,content,item) VALUES('[황소자리 4.20 ~ 5.20]',2,3);
+INSERT INTO star_table(title,content,item) VALUES('[쌍둥이자리 5.21 ~ 6.21]',2,3);
+INSERT INTO star_table(title,content,item) VALUES('[게자리 6.22 ~ 7.22]','안녕','hi');
+INSERT INTO star_table(title,content,item) VALUES('[사자자리 7.23 ~ 8.22]',2,3);
+INSERT INTO star_table(title,content,item) VALUES('[처녀자리 8.23 ~ 9.22]','qwewqeqe','ㅁㄴㅇㅁㄴㅇㅁㄴㅇ');
+INSERT INTO star_table(title,content,item) VALUES('[천칭자리 9.23 ~ 10.23]',2,3);
+INSERT INTO star_table(title,content,item) VALUES('[전갈자리 10.24 ~ 11.22]',2,3);
+INSERT INTO star_table(title,content,item) VALUES('[사수자리 11.23 ~ 12.21]',2,3);
+INSERT INTO star_table(title,content,item) VALUES('[염소자리 12.22 ~ 1.19]',2,3);
+
+commit;
+
+SELECT
+    *
+FROM star_table;
+update star_table set content='이야이야이야',item='공룡1' where title='[염소자리 12.22 ~ 1.19]';
+update star_table set content='이야이야이야',item='공룡2' where title='[물병자리 1.20 ~ 2.18]';
+update star_table set content='이야이야이야',item='공룡3' where title='[물고기자리 2.19 ~ 3.20]';
+update star_table set content='이야이야이야',item='공룡4' where title='[양자리 3.21 ~ 4.19]';
+update star_table set content='이야이야이야',item='공룡5' where title='[황소자리 4.20 ~ 5.20]';
+update star_table set content='이야이야이야',item='공룡6' where title='[쌍둥이자리 5.21 ~ 6.21]';
+update star_table set content='이야이야이야',item='공룡7' where title='[게자리 6.22 ~ 7.22]';
+update star_table set content='이야이야이야',item='공룡8' where title='[사자자리 7.23 ~ 8.22]';
+update star_table set content='이야이야이야',item='공룡9' where title='[처녀자리 8.23 ~ 9.22]';
+update star_table set content='이야이야이야',item='공룡0' where title='[천칭자리 9.23 ~ 10.23]';
+update star_table set content='이야이야이야',item='공룡10' where title='[전갈자리 10.24 ~ 11.22]';
+update star_table set content='이야이야이야',item='공룡11' where title='[사수자리 11.23 ~ 12.21]';
+commit;

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.project.nolate.mapper.MapMapper" >
+
+	
+	<select id="mapList" parameterType="string" resultType="Mapp" resultMap="MapResultMap">
+		SELECT 
+			* 
+		FROM map 
+		WHERE id = #{id}
+	</select>
+	
+	<select id="getMap" resultType="Mapp" resultMap="MapResultMap">
+		SELECT 
+			* 
+		FROM map
+		WHERE no = #{no}
+	</select>
+	
+	<insert id="insertMap" parameterType="Mapp"
+		useGeneratedKeys="true" keyProperty="no">
+		INSERT INTO map(id, map_s, map_e)
+			VALUES(#{id}, #{map_s}, #{map_e})
+	</insert>
+	
+	
+	<update id="updateMap" parameterType="Mapp">
+		UPDATE map 
+			SET map_s = #{map_s}, map_e = #{map_e}
+		WHERE no = #{no}
+	</update>
+	
+	<delete id="deleteMap">
+		DELETE FROM map
+		WHERE no = #{no}
+	</delete>
+	
+	<select id="maps_str" resultType="String">
+		SELECT 
+			map_s 
+		FROM map
+		WHERE no = #{no}
+	</select>
+	<select id="mape_str" resultType="String">
+		SELECT 
+			map_e 
+		FROM map
+		WHERE no = #{no}
+	</select>
+	<select id="countMap"  resultType="int">
+		SELECT 
+			COUNT(*) 
+		FROM map
+	</select>
+	
+	<select id="getMapNo" resultType="integer">
+		SELECT AUTO_INCREMENT
+		FROM information_schema.tables
+		WHERE table_name = "map" AND table_schema = DATABASE();
+	</select>
+	
+	<resultMap id="MapResultMap" type="Mapp">
+		<id property="no" column="no" />
+		<result property="map_s" column="map_s" />
+		<result property="map_e" column="map_e" />
+		
+	</resultMap>
+</mapper>	
+
+
+

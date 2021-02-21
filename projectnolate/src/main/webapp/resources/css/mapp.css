@@ -1,0 +1,91 @@
+@CHARSET "UTF-8";
+/*  mapp 전체 적용 */
+
+.Aside {
+	float: left;
+	width: 380px;
+	/* border: 1px solid red; */
+	border-collapse: collapse;
+	color: #000000;
+    /* border: solid 1px #da7c0c; */
+   font: 17px/100% Malgun Gothic, Helvetica, sans-serif;
+}
+
+.map_wrap {
+	width: 600px;
+	float: right;
+	/* border: 8px solid #00bc53; */ 
+	border-collapse: collapse;
+}
+
+.bookmark {
+	width: 340px;
+	/* border: 1px solid yellow; */
+	border-collapse: collapse;
+}
+
+.bookmarkTable {
+	
+	margin: 0 0;
+	padding: 0 0;
+    border-collapse: collapse;
+    line-height: 160%;
+    font-size: 0.75em;
+}
+
+.button {
+	
+	padding-bottom: 4px;
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+    vertical-align: baseline;
+    margin: 0 2px;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font: 17px/100% Malgun Gothic, Helvetica, sans-serif;
+    /* padding: .5em 2em .55em; */ 
+    text-shadow: 0 1px 1px rgba(0,0,0,.3);
+    -webkit-border-radius: .5em;
+    -moz-border-radius: .5em;
+    border-radius: .5em;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    box-shadow: 0 1px 2px rgba(0,0,0,.2);
+}
+.green {
+    color: #e8f0de;
+    border: solid 1px #00bc53;
+    background: #00bc53;
+    
+}
+.greenbk {
+	font: 8px/100% Malgun Gothic, Helvetica, sans-serif;
+    color: #001111;
+    border: solid 1px #538312;
+    background: #00bc53;
+    
+}
+#result {
+	border: 1px solid #787878;
+	border-collapse:collapse; 
+}
+.map_update:hover {
+	cursor: pointer;
+	background: #eddd0f;
+	color: #ff0000;
+}
+.map_update {
+	color: #e8f0de;
+    border: solid 1px #e8f0de;
+    background: #00bc53;
+    border-radius: 15px;
+}
+.order_bt {
+	cursor: pointer;
+}
+.white_td {
+	color: #e8f0de;
+}

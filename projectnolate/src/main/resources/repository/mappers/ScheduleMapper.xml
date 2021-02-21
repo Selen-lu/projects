@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.project.nolate.mapper.ScheduleMapper">
+
+	<select id="getScheduleList" parameterType="hashMap"  resultType="Schedule">
+		SELECT schedule.schedule_no AS scheduleNo,
+			   schedule.schedule_day AS scheduleDate,
+			   schedule.schedule_title AS scheduleTitle,
+			   schedule.schedule_materials AS scheduleMaterials
+		FROM schedule, schedule_calender
+		WHERE schedule_calender.id = #{id} AND schedule.schedule_no = schedule_calender.schedule_no
+				AND year(schedule.schedule_day) = #{year} AND month(schedule.schedule_day) = #{month} 
+	</select>
+	
+	<select id="getSchedule" parameterType="hashMap" resultType="Schedule">
+		SELECT schedule.schedule_no AS scheduleNo,
+			   schedule.schedule_day AS scheduleDate,
+			   schedule.schedule_title AS scheduleTitle,
+			   schedule.schedule_materials AS scheduleMaterials
+		FROM schedule, schedule_calender
+		WHERE schedule_calender.id = #{id} AND schedule.schedule_no = schedule_calender.schedule_no
+				AND schedule.schedule_no = #{no}
+	</select>
+	
+	<select id="getTodayScheduleList" parameterType="hashMap" resultType="Schedule">
+		SELECT schedule.schedule_no AS scheduleNo,
+			   schedule.schedule_day AS scheduleDate,
+			   schedule.schedule_title AS scheduleTitle,
+			   schedule.schedule_materials AS scheduleMaterials
+		FROM schedule, schedule_calender
+		WHERE schedule_calender.id = #{id} AND schedule.schedule_no = schedule_calender.schedule_no
+				AND year(schedule.schedule_day) = #{year} AND month(schedule.schedule_day) = #{month} AND month(schedule.schedule_day) = #{day}
+	</select>
+		
+	<insert id="setSchedule" parameterType="Schedule">
+		INSERT INTO schedule(schedule_no, schedule_day, schedule_title, schedule_materials)
+		VALUES(#{scheduleNo}, #{scheduleDate}, #{scheduleTitle}, #{scheduleMaterials})
+	</insert>
+	
+	<insert id="setScheduleBase" parameterType="ScheduleCalender">
+		INSERT INTO schedule_calender(schedule_no, ID)
+		VALUES(#{scheduleNo}, #{id})  
+	</insert>
+	
+	<update id="updateSchedule" parameterType="Schedule">
+		UPDATE schedule
+		SET schedule_day = #{scheduleDate}, schedule_title = #{scheduleTitle}, schedule_materials = #{scheduleMaterials}
+		WHERE schedule_No = #{scheduleNo}
+	</update>
+
+	<delete id="deleteSchedule" parameterType="hashMap">
+		DELETE FROM schedule
+		WHERE schedule_no = #{scheduleNo}
+	</delete>
+	
+	<delete id="deleteScheduleBase" parameterType="hashMap">
+		DELETE FROM schedule_calender
+		WHERE ID = #{id} AND schedule_no = #{scheduleNo}
+	</delete>
+	
+	<select id="getScheduleBaseNo"  resultType="integer">
+		SELECT AUTO_INCREMENT
+		FROM information_schema.tables
+		WHERE table_name = "schedule_calender" AND table_schema = DATABASE();
+	</select>
+
+</mapper>

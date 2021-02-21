@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+		
+	
+	<security:http auto-config="true" use-expressions="true">
+		<security:intercept-url pattern="/main/**" access="hasRole('ROLE_MEMBER')"/>
+		<security:intercept-url pattern="/**" access="permitAll"/>
+		<security:form-login 
+			password-parameter="id"
+			username-parameter="pass"
+			login-processing-url="/login"
+			login-page="/signIn"
+			default-target-url="/main"
+			always-use-default-target="true"
+		/>
+		<security:logout 
+			logout-url="/logout"
+			logout-success-url="/signIn"
+		/>
+	</security:http>
+	<security:authentication-manager>
+		 <security:authentication-provider ref="customAuthenticationProvider"/> 
+		<security:authentication-provider user-service-ref="customUserDetailsService" >
+			<security:password-encoder ref="bcryptPasswordEncoder"/>
+		</security:authentication-provider>
+	</security:authentication-manager>
+	
+	 <bean id="customAuthenticationProvider"
+		class="com.project.nolate.service.member.CustomAuthenticationProvider"/>
+	
+	<bean id="customUserDetailsService" 
+		class="com.project.nolate.service.member.CustomUserDetailsService" />
+		
+	<bean id="bcryptPasswordEncoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	
+</beans>

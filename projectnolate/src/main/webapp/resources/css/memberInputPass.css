@@ -1,0 +1,32 @@
+@charset "UTF-8";
+.inputPassBody{
+	padding-top: 40px;
+	padding-bottom: 40px;
+	background-color: #eee;
+}
+
+.check_pass_form{
+  	max-width: 400px;
+ 	 padding: 15px;
+  	margin: 0 auto;
+}
+
+.check_pass_form > .form-control{
+	position: relative;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.check_pass_form > .form-control:focus{
+	z-index: 2;
+}
+
+.check_btn_area{
+	max-width: 400px;
+ 	 padding: 15px;
+  	margin: 0 auto;
+}

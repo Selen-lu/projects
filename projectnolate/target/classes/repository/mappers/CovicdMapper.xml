@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.nolate.mapper.CovidMapper" >
+
+
+<select id="DBdate" resultType="String">
+SELECT CREATEDT FROM incdec_table WHERE gubun='합계' AND createDt LIKE CONCAT('%',#{date01}, '%')
+</select>
+
+
+
+<select id="getTotal" resultType="Covid">
+SELECT * FROM incdec_table WHERE gubun='합계' AND createDt LIKE CONCAT('%',#{date01}, '%')
+</select>
+<select id="getCovid" resultType="Covid" parameterType="hashmap">
+SELECT * FROM incdec_table WHERE gubun=#{gubun} AND createDt LIKE CONCAT('%',#{date01}, '%')
+</select>
+
+
+<insert id="insertCovid" parameterType="HashMap"
+>
+INSERT INTO incdec_table(gubun,defCnt,incDec,isolClearCnt,deathCnt,qurRate,stdDay,overFlowCnt,localOccCnt,createDt) 
+VALUES(#{gubun},#{defCnt},#{incDec},#{isolClearCnt},#{deathCnt},#{qurRate},#{stdDay},#{overFlowCnt},#{localOccCnt},#{createDt})
+</insert>
+
+	
+	<select id="getDay" resultType="Covid">
+		SELECT * 
+		FROM incdec_table 
+		WHERE gubun=#{gubun} AND createDt LIKE CONCAT('%',#{date}, '%')
+	</select>
+	
+	<insert id="insertAll" parameterType="HashMap" 
+	useGeneratedKeys="true" keyProperty="no">
+		INSERT INTO incdec_table(gubun,defCnt,incDec,isolClearCnt,deathCnt,qurRate,stdDay,overFlowCnt,localOccCnt,createDt) 
+		VALUES(#{gubun},#{defCnt},#{incDec},#{isolClearCnt},#{deathCnt},#{qurRate},#{stdDay},#{overFlowCnt},#{localOccCnt},#{createDt})
+	
+	</insert>
+
+
+<select id="getChart" parameterType="String" resultType="Covid">
+SELECT defCnt,incDec,stdDay FROM incdec_table where gubun=#{gubun} order by createDt ASC
+</select>
+
+</mapper>	
+
+
+

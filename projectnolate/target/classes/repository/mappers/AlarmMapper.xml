@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.nolate.mapper.AlarmMapper">
+	<insert id="setAlarm">
+		INSERT INTO alarm(alarm_no, id, alarm_time, weather_check, bbs_check, corona_check, schedule_check, starluck_check)
+		VALUES(#{alarmNo}, #{id}, #{alarmTime}, #{weatherCheck}, #{bbsCheck}, #{coronaCheck}, #{scheduleCheck}, #{starluckCheck})		
+	</insert>
+		
+	<update id="updateAlarm">
+		UPDATE alarm
+		SET alarm_time = #{alarmTime}, weather_check = #{weatherCheck}, bbs_check = #{bbsCheck}, corona_check = #{coronaCheck}, schedule_check = #{scheduleCheck}, starluck_check = #{starluckCheck}
+		WHERE alarmNo = #{alarmNo} AND id = #{id}
+	</update>
+	
+	<delete id="deleteAlarm">
+		DELETE alarm
+		WHERE alarmNo = #{alarmNo}
+	</delete>
+	
+	<select id="">
+	
+	</select>
+	
+	<select id="getAlarmNo" parameterType="string" resultType="integer">
+		SELECT AUTO_INCREMENT
+		FROM information_schema.tables
+		WHERE table_name = "alarm" AND table_schema = DATABASE();
+	</select>
+</mapper>

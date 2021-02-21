@@ -1,0 +1,8 @@
+@CHARSET "UTF-8";
+.map_wrap {position:relative;width:400px;height:400px; margin: 0 auto ;/* 중앙정렬 */}
+.title {font-weight:bold;display:block;}
+.hAddr {display:block; left:10px;top:10px;border-radius: 2px;background:#fff;background:rgba(255,255,255,0.8);z-index:1;padding:5px;}
+#centerAddr {display:block;margin-top:2px;font-weight: normal;}
+#iamHere{visibility: hidden;}
+#centerAddr2 {display:block;margin-top:2px;font-weight: normal;}
+.bAddr {padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
